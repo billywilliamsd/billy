@@ -10,8 +10,8 @@ LWindow g = {"GLOBAL", 900, 600};
 vector<LTexture*> v;
 
 bool init(); //SDL init
-void addTexture(string s, int x, int y); //SDL init helper
 bool loadMedia(); //textures
+void addTexture(string s, int x, int y); //loadMedia helper
 void close(); //SDL clean up
 
 int main(int argc, char** argv){
