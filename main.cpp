@@ -7,7 +7,7 @@ using namespace std;
 LWindow g = {"GLOBAL", 900, 600};
 
 //global vector v to hold textures 
-vector<LTexture> v;
+vector<LTexture*> v;
 
 bool init(); //SDL init
 void addTexture(string s, int x, int y); //SDL init helper
@@ -17,9 +17,6 @@ void close(); //SDL clean up
 int main(int argc, char** argv){
     if(init() == false) return 1;
     if(loadMedia() == false) return 2;
-    vector<LTexture>::iterator iter;
-    for(iter = v.begin(); iter != v.end(); ++iter)
-        cout << iter->file << endl;
     bool quit = false;
     SDL_Event e;
     SDL_zero(e);
@@ -55,10 +52,10 @@ void close(){
 }
 
 void addTexture(string s, int x, int y){
-    LTexture t;
-    t.file = s;
-    t.mPosX = x;
-    t.mPosY = y;
+    LTexture* t = new LTexture;
+    t->file = s;
+    t->mPosX = x;
+    t->mPosY = y;
     v.push_back(t);
-    if(v[v.size() - 1].loadFromFile(s) == true) cout << "loadFromFile " << s << " true\n";
+    if(v[v.size() - 1]->loadFromFile(s) == true) cout << "loadFromFile " << s << " true\n";
 }

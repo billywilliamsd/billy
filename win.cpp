@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-extern vector<LTexture> v;
+extern vector<LTexture*> v;
 
 //name of window s, width and height of window in pixels
 LWindow::LWindow(string s, int width, int height):mWidth(width), mHeight(height){
@@ -23,8 +23,12 @@ void LWindow::render(){
     SDL_SetRenderDrawColor(r, 0x00, 0x00, 0x00, 0x00);
     SDL_RenderClear(r);
 
-    for(auto iter = v.begin(); iter != v.end(); ++iter)
+    /*for(auto iter = v.begin(); iter != v.end(); ++iter)
         iter->render();
+    */
+
+    for(int i = 0; i < v.size(); i++)
+        v.at(i)->render();
 
     SDL_RenderPresent(r);
 }
