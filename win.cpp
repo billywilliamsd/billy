@@ -3,8 +3,13 @@
 #include <vector>
 #include <iostream>
 using namespace std;
+#define BILLION 1000000000
 
+//global texture vector
 extern vector<LTexture*> v;
+
+//frametime
+extern Uint64 frametime;
 
 //name of window s, width and height of window in pixels
 LWindow::LWindow(string s, int width, int height):mWidth(width), mHeight(height){
@@ -27,8 +32,17 @@ void LWindow::render(){
         iter->render();
     */
 
+
+    v.at(5)->loadFromRenderedText(to_string(frametime), {0x00, 0xFF, 0x41, 0xFF});
+    if(frametime > 0){
+        double frames = 1000000000.0 / frametime;
+        v.at(7)->loadFromRenderedText(to_string(frames), {0x00, 0xFF, 0x41, 0xFF});
+    }
     for(int i = 0; i < v.size(); i++)
         v.at(i)->render();
+
+    /*SDL_FRect rect = {75.f, 150.f, 22, 22};
+    SDL_RenderTexture(g.r, , nullptr, &rect);*/
 
     SDL_RenderPresent(r);
 }

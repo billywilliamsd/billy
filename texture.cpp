@@ -1,11 +1,15 @@
 #include "texture.h"
 #include "win.h"
 #include <SDL3_image/SDL_image.h>
+#include <SDL3_ttf/SDL_ttf.h>
 #include <iostream>
 using namespace std;
 
 //global window g
 extern LWindow g;
+
+//global font
+extern TTF_Font* font;
 
 LTexture::LTexture():mTexture{NULL}, mWidth(0), mHeight(0), mPosX(0), mPosY(0){}
 
@@ -24,6 +28,18 @@ bool LTexture::loadFromFile(string s){
     if(ls == nullptr) return false;
 
     if(SDL_SetSurfaceColorKey(ls, true, SDL_MapSurfaceRGB(ls, 0x00, 0xFF, 0xFF)) == false) return false;
+    mTexture = SDL_CreateTextureFromSurface(g.r, ls);
+    if(mTexture == nullptr) return false;
+    mWidth = ls->w;
+    mHeight = ls->h;
+    SDL_DestroySurface(ls);
+    return mTexture != nullptr;
+}
+
+bool LTexture::loadFromRenderedText(string s, SDL_Color c){
+    destroy();
+    SDL_Surface* ls = TTF_RenderText_Blended(font, s.c_str(), 0, c);
+    if(ls == nullptr) return false;
     mTexture = SDL_CreateTextureFromSurface(g.r, ls);
     if(mTexture == nullptr) return false;
     mWidth = ls->w;

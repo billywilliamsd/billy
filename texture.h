@@ -18,6 +18,7 @@ public:
     ~LTexture();
     void destroy();
     bool loadFromFile(string s);
+    bool loadFromRenderedText(string s, SDL_Color c);
     void render();
 
     int getWidth();

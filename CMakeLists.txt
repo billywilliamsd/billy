@@ -9,11 +9,12 @@ set(SDLIMAGE_AVIF OFF)
 
 add_subdirectory(SDL EXCLUDE_FROM_ALL)
 add_subdirectory(SDL3_image EXCLUDE_FROM_ALL)
+add_subdirectory(SDL3_ttf EXCLUDE_FROM_ALL)
 
 # Create your game executable target as usual
 add_executable(run main.cpp win.cpp texture.cpp)
 
 # Link to the actual SDL3 library.
-target_link_libraries(run PRIVATE SDL3::SDL3 SDL3_image::SDL3_image)
+target_link_libraries(run PRIVATE SDL3::SDL3 SDL3_image::SDL3_image SDL3_ttf::SDL3_ttf)
 
 target_compile_features(run PRIVATE cxx_std_17)
