@@ -3,6 +3,7 @@
 #include <SDL3/SDL.h>
 #include <string>
 #include <vector>
+using namespace std;
 
 class LTexture{
     SDL_Texture* mTexture;
