@@ -4,8 +4,9 @@
 #include <iostream>
 using namespace std;
 
-extern vector<LTexture> texture;
+extern vector<LTexture> v;
 
+//name of window s, width and height of window in pixels
 LWindow::LWindow(string s, int width, int height):mWidth(width), mHeight(height){
     w = SDL_CreateWindow(s.c_str(), width, height, 0);
     if(w == nullptr) return;
@@ -22,8 +23,8 @@ void LWindow::render(){
     SDL_SetRenderDrawColor(r, 0x00, 0x00, 0x00, 0x00);
     SDL_RenderClear(r);
 
-    for(auto it = texture.begin(); it != texture.end(); ++it)
-        it->render();
+    for(auto iter = v.begin(); iter != v.end(); ++iter)
+        iter->render();
 
     SDL_RenderPresent(r);
 }

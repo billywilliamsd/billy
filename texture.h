@@ -3,7 +3,6 @@
 #include <SDL3/SDL.h>
 #include <string>
 #include <vector>
-using namespace std;
 
 class LTexture{
     SDL_Texture* mTexture;
@@ -16,8 +15,8 @@ public:
 
     LTexture();
     ~LTexture();
-    bool loadFromFile(string s);
     void destroy();
+    bool loadFromFile(string s);
     void render();
 
     int getWidth();

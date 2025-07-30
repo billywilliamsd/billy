@@ -3,20 +3,23 @@
 #include <iostream>
 using namespace std;
 
+//global window g
 LWindow g = {"GLOBAL", 900, 600};
-vector<LTexture> texture;
 
-bool init();
-bool loadMedia();
-void close();
-void addTexture(string s, int x, int y);
+//global vector v to hold textures 
+vector<LTexture> v;
+
+bool init(); //SDL init
+void addTexture(string s, int x, int y); //SDL init helper
+bool loadMedia(); //textures
+void close(); //SDL clean up
 
 int main(int argc, char** argv){
     if(init() == false) return 1;
     if(loadMedia() == false) return 2;
-    vector<LTexture>::iterator it;
-    for(it = texture.begin(); it != texture.end(); ++it)
-        cout << it->file << endl;
+    vector<LTexture>::iterator iter;
+    for(iter = v.begin(); iter != v.end(); ++iter)
+        cout << iter->file << endl;
     bool quit = false;
     SDL_Event e;
     SDL_zero(e);
@@ -56,6 +59,6 @@ void addTexture(string s, int x, int y){
     t.file = s;
     t.mPosX = x;
     t.mPosY = y;
-    texture.push_back(t);
-    if(texture[texture.size() - 1].loadFromFile(s) == true) cout << "loadFromFile " << s << " true\n";
+    v.push_back(t);
+    if(v[v.size() - 1].loadFromFile(s) == true) cout << "loadFromFile " << s << " true\n";
 }
