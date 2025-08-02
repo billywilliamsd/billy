@@ -15,4 +15,5 @@ public:
     void handleEvent(SDL_Event& e);
     void move();
     void render();
+    void setClip(int n);
 };

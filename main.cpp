@@ -33,6 +33,7 @@ void close(); //SDL clean up
 int main(int argc, char** argv){
     if(init() == false) return 1;
     if(loadMedia() == false) return 2;
+    int frame = -1;
     bool quit = false;
     SDL_Event e;
     SDL_zero(e);
@@ -46,6 +47,15 @@ int main(int argc, char** argv){
         double total = 1000000000.0 / fps;
         SDL_DelayNS(total - frametime);
         frametime = SDL_GetTicksNS() - t;
+
+        frame++;
+        constexpr int AnimFrames = 4; //4 total sprites
+        constexpr int FramesPerSprite = 6; //6 frames per sprite
+        if(frame/FramesPerSprite >= AnimFrames) frame = 0;
+        cout << "frame = " << frame << endl;
+        cout << "\tFramesPerSprite = " << FramesPerSprite << endl;
+        cout << "\tframe/FramesPerSprite = " << frame << "/" << FramesPerSprite << " == " << frame/FramesPerSprite << endl;
+        player.setClip(frame/FramesPerSprite);
     }
     close();
     return 0;

@@ -42,3 +42,7 @@ void Player::render(){
     SDL_FRect dstRect = {mPosX, mPosY, PLAYERWIDTH, PLAYERHEIGHT};
     SDL_RenderTexture(g.r, sheet, &currentClip, &dstRect);
 }
+
+void Player::setClip(int n){
+    currentClip = clips[n];
+}
