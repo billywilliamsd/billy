@@ -2,6 +2,7 @@
 #include "win.h"
 #include "texture.h"
 #include <iostream>
+#include "player.h"
 using namespace std;
 
 //global window g
@@ -20,6 +21,8 @@ constexpr SDL_Color GREEN = {0x00, 0xFF, 0x41, 0xFF};
 Uint64 frametime;
 //global framerate
 double fps = 60.0;
+
+extern Player player;
 
 bool init(); //SDL init
 bool loadMedia(); //textures

@@ -2,6 +2,7 @@
 #include "texture.h"
 #include <vector>
 #include <iostream>
+#include "player.h"
 using namespace std;
 #define BILLION 1000000000
 
@@ -10,6 +11,8 @@ extern vector<LTexture*> v;
 
 //frametime
 extern Uint64 frametime;
+
+Player player;
 
 //name of window s, width and height of window in pixels
 LWindow::LWindow(string s, int width, int height):mWidth(width), mHeight(height){
@@ -28,11 +31,6 @@ void LWindow::render(){
     SDL_SetRenderDrawColor(r, 0x00, 0x00, 0x00, 0x00);
     SDL_RenderClear(r);
 
-    /*for(auto iter = v.begin(); iter != v.end(); ++iter)
-        iter->render();
-    */
-
-
     v.at(5)->loadFromRenderedText(to_string(frametime), {0x00, 0xFF, 0x41, 0xFF});
     if(frametime > 0){
         double frames = 1000000000.0 / frametime;
@@ -40,9 +38,7 @@ void LWindow::render(){
     }
     for(int i = 0; i < v.size(); i++)
         v.at(i)->render();
-
-    /*SDL_FRect rect = {75.f, 150.f, 22, 22};
-    SDL_RenderTexture(g.r, , nullptr, &rect);*/
+    player.render();
 
     SDL_RenderPresent(r);
 }
